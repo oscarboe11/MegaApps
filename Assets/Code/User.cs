@@ -6,20 +6,19 @@ public class User {
     private string username;
     private string password;
     private bool loggedIn;
-    private ArrayList wishlist;
+    private List<App> wishlist;
 
     public User() {
         username = "";
         password = "";
         loggedIn = false;
-        wishlist = new ArrayList();
     }
 
     public User(string username, string password) {
         this.username = username;
         this.password = password;
         loggedIn = true;
-        wishlist = new ArrayList();
+        wishlist = new List<App>();
     }
 
     public string getUsername() {
