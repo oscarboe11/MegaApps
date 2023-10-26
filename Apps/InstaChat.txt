@@ -1,0 +1,8 @@
+Name: InstaChat
+Description: Social Networking App.
+Organization: Metworks Inc
+Platform: Windows/MacOS
+Version: 1.4.1
+Category: Communication
+Link: http://www.InstaChat.com/
+Price: Free

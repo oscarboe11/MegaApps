@@ -1,0 +1,8 @@
+Name: StreamUs
+Description: TV Streaming app.
+Organization: Streaming Solutions Inc
+Platform: Windows/MacOS
+Version: 1.6.2
+Category: Entertainment
+Link: http://www.StreamUs.com
+Price: Free

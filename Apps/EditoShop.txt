@@ -1,0 +1,8 @@
+Name: EditoShop
+Description: Premium Photo Editing App.
+Organization: Adobo Inc
+Platform: Windows/MacOS
+Version: 13.1.4
+Category: Productivity
+Link: http://www.Adobo.com/EditoShop
+Price: $499.99

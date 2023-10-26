@@ -1,0 +1,8 @@
+Name: BankingPro
+Description: Banking App
+Organization: Generic Banks Inc
+Platform: Windows/MacOS
+Version: 1.0.1
+Category: Productivity
+Link: http://www.GenericBanks.com/BankingPro
+Price: $4.99

@@ -1,0 +1,8 @@
+Name: MetBook
+Description: Social Networking App.
+Organization: Metworks Inc
+Platform: Windows/MacOS
+Version: 1.9.1
+Category: Communication
+Link: http://www.MetBook.com/
+Price: Free

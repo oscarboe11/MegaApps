@@ -1,0 +1,8 @@
+Name: Choogle Canvaroom
+Description: Educational App
+Organization: Choogle Inc
+Platform: Windows/MacOS/BromeOS
+Version: 2.0.4
+Category: Education
+Link: http://www.Choogle.com/Canvaroom
+Price: Free

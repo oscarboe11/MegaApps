@@ -1,0 +1,8 @@
+Name: Skybe
+Description: Video Calling App.
+Organization: BikeroSoft Inc
+Platform: Windows/MacOS
+Version: 10.9.4
+Category: Communication
+Link: http://www.BikeroSoft.com/Skybe
+Price: Free

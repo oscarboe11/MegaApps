@@ -1,0 +1,8 @@
+Name: Musicify
+Description: Music Streaming app.
+Organization: Musicify Inc
+Platform: Windows/MacOS
+Version: 3.6.8
+Category: Entertainment
+Link: http://www.Musicify.com
+Price: Free

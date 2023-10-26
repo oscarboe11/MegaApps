@@ -1,0 +1,8 @@
+Name: Irate Avians
+Description: Timewasting Game.
+Organization: Riovo Inc
+Platform: Windows/BromeOS
+Version: 2.2.1
+Category: Games
+Link: http://www.Riovo.com/IrateAvians
+Price: $2.99
