@@ -6,10 +6,10 @@ public class Admin : Moderator {
     private bool isAdmin;
 
     public Admin(string username, string password) : Moderator(username, password) {
-        isAdmin = true;
+        this.isAdmin = true;
     }
 
-    public bool isAdmin() {
+    public bool getAdminState() {
         return isAdmin;
     }
     public void addApp() {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class App {
     private string name;
-    private string description:
+    private string description;
     private string category;
     private string platform;
     private string version;
@@ -59,7 +59,7 @@ public class App {
         this.category = category;
     }
 
-    public void setPlatform(string version) {
+    public void setPlatform(string platform) {
         this.platform = platform;
     }
 
@@ -68,14 +68,14 @@ public class App {
     }
 
     public void getOrganization(string organization) {
-        this.organization organization;
+        this.organization = organization;
     }
 
-    public void setLink() {
+    public void setLink(string link) {
         this.link = link;
     }
     
-    public void setPrice() {
+    public void setPrice(float price) {
         this.price = price;
     }
 }

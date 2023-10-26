@@ -6,7 +6,7 @@ public class Moderator : User {
     private bool isMod;
 
     public Moderator(string username, string password) : User(username, password) {
-        isMod = true;
+        this.isMod = true;
     }
 
     public bool isModerator() {

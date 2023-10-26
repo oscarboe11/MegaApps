@@ -9,16 +9,16 @@ public class User {
     private List<App> wishlist;
 
     public User() {
-        username = "";
-        password = "";
-        loggedIn = false;
+        this.username = "";
+        this.password = "";
+        this.loggedIn = false;
     }
 
     public User(string username, string password) {
         this.username = username;
         this.password = password;
-        loggedIn = true;
-        wishlist = new List<App>();
+        this.loggedIn = true;
+        this.wishlist = new List<App>();
     }
 
     public string getUsername() {
