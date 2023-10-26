@@ -29,6 +29,10 @@ public class User {
         return password;
     }
 
+    public bool isLoggedIn() {
+        return loggedIn;
+    }
+
     public void comment() {
         // make comment
     }

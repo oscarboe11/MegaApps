@@ -5,7 +5,7 @@ using UnityEngine;
 public class Moderator : User {
     private bool isMod;
 
-    public Moderator(string username, string password) : User(username, password) {
+    public Moderator(string username, string password) : base(username, password) {
         this.isMod = true;
     }
 

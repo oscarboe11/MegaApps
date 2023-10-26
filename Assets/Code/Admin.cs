@@ -5,7 +5,7 @@ using UnityEngine;
 public class Admin : Moderator {
     private bool isAdmin;
 
-    public Admin(string username, string password) : Moderator(username, password) {
+    public Admin(string username, string password) : base(username, password) {
         this.isAdmin = true;
     }
 
