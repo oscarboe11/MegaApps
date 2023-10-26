@@ -9,7 +9,7 @@ public class Admin : Moderator {
         this.isAdmin = true;
     }
 
-    public bool isAdmin() {
+    public bool isAdministrator() {
         return isAdmin;
     }
     public void addApp() {

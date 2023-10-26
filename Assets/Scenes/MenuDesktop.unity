@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 886289728}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.32820988
+  m_Size: 0.3282099
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4345,6 +4345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: {fileID: 328541165}
+  loginText: {fileID: 1182453818}
   userName: {fileID: 1044691551}
   userPsw: {fileID: 678075833}
 --- !u!1 &2000809443
