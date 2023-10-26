@@ -1,0 +1,8 @@
+Name: Choogle Brome
+Description: Web Browsing App
+Organization: Choogle Inc
+Platform: Windows/MacOS/BromeOS
+Version: 11.14.2
+Category: Web Browsing
+Link: http://www.Choogle.com/Brome
+Price: Free

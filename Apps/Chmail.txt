@@ -1,0 +1,8 @@
+Name: Chmail
+Description: Email App
+Organization: Choogle Inc
+Platform: Windows/MacOS/BromeOS
+Version: 11.11.11
+Category: Communication
+Link: http://www.Choogle.com/getChmail
+Price: Free

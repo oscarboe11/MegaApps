@@ -1,0 +1,8 @@
+Name: EduApp
+Description: Educational App
+Organization: Edu Inc
+Platform: Windows/MacOS
+Version: 1.0.8
+Category: Education
+Link: http://www.EduApp.com
+Price: $2.99

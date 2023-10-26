@@ -1,0 +1,8 @@
+Name: GPluS
+Description: GPS App;
+Organization: GeePeeEss Inc
+Platform: Windows/MacOS
+Version: 2.4.8
+Category: Navigation
+Link: http://www.GPluS.com
+Price: Free

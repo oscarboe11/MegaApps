@@ -1,0 +1,8 @@
+Name: XtremeHealth
+Description: Health Tracker App.
+Organization: Robert Medical Inc
+Platform: Windows/MacOS
+Version: 1.0.0
+Category: Medical
+Link: http://www.XHealth.com
+Price: Free
