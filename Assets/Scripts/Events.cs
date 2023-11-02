@@ -16,7 +16,7 @@ public class Events : MonoBehaviour
                 //Debug.Log(app.Value.getName());
                 TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
                 if(ButtonText != null) {
-                    //ButtonText.text = app.Value.GetName();
+                    // ButtonText.text = app.Value.GetName();
                     ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
                 }
             }

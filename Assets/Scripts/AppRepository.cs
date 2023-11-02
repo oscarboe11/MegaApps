@@ -18,7 +18,7 @@ public class AppRepository
             line = file.ReadLine().Split(':');
             if(line.Length > 1) {
                 appInfo.Add(line[1]);
-                // Debug.Log(line[1]);
+                //Debug.Log(line[1]);
                 if(line[0] == "Price") {
                     App app = new App(appInfo);
                     repository.Add(appInfo[0], app);

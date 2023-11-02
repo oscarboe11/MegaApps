@@ -11,7 +11,7 @@ public class EventsManager : MonoBehaviour
     public GameObject AppButton;
     public GameObject MainMenuContent;
     
-    void Start()
+    void Start()    
     {
         Events.InitiateMenu(AppButton, MainMenuContent);
     }
@@ -19,5 +19,13 @@ public class EventsManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void FixedUpdate() {
+        
+    }
+
+    void Awake() {
+
     }
 }
