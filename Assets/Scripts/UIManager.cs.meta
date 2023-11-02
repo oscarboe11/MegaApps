@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c753b29772181544b76cad6ea0c73ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - LoginPage: {fileID: 2833210202686377825, guid: 40d2046f686ef7c4ba0acd0e1dc2a643, type: 3}
+  - MainMenu: {fileID: 1847745154164095222, guid: 876d4ae66fb68c54bba4a09cb63c02bf, type: 3}
+  - CategoryPage: {fileID: 6083500837372854307, guid: 0b4c3cd53fed45f4ea0f960d6bb99cd6, type: 3}
+  - AppPage: {fileID: 2563360437929448311, guid: c3875b516230fa344bdb09c936d5b0ff, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
