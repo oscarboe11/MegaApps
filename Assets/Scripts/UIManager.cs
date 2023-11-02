@@ -12,15 +12,6 @@ public class UIManager : MonoBehaviour
     public GameObject CategoryPage;
     public GameObject AppPage;
     
-    // Use for general test.
-    void Start() {
-        //AppRepository ar = new AppRepository();
-    }
-
-    // public void CreateRep() {
-    //     AppRepository ar = new AppRepository();
-    // }
-
     public void Login() {
         if(!LoginPage.activeSelf) {
             LoginPage.SetActive(true);

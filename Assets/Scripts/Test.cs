@@ -1,16 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // public GameObject AppButton;
+    // public GameObject MainMenuContent;
+    // public GameObject Debug;
     void Start()
     {
-           Debug.Log("Hello World.");
+        // TDD test for initiate main menu
+        // Dictionary<string, App> appRepository = new AppRepository().GetApps();
+        // Events.InitiateMenu(AppButton, MainMenuContent);
+        // if (appRepository[" Your Music"].GetName() == null) {
+        //     Debug.GetComponent<TextMeshProUGUI>().text = "Error";
+        // }
+        // Debug.GetComponent<TextMeshProUGUI>().text = appRepository[" Your Music"].GetName();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
