@@ -18,7 +18,7 @@ public class EventsManager : MonoBehaviour
 
     void Update()
     {
-        
+        Events.SearchApps();
     }
 
     void FixedUpdate() {

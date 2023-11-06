@@ -50,4 +50,8 @@ public class Events : MonoBehaviour
         gameObject = AppPage.transform.Find("Info").Find("Price").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
     }
+
+    public static void SearchApps(string searchTerms) {
+        
+    }
 }
