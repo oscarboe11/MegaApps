@@ -28,6 +28,6 @@ public class Test : MonoBehaviour
     {
         TextMeshProUGUI searchText = searchBar.GetComponentInChildren<TextMeshProUGUI>();
         string a = searchText.text;
-        Debug.Log(a);  
+        //Debug.Log(a);  
     }
 }

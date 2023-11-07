@@ -4644,6 +4644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppButton: {fileID: 6527194139504102231, guid: d3b05ef5c498c4042a8e23f400ac145f, type: 3}
   MainMenuContent: {fileID: 8207661157386705587}
+  SearchBar: {fileID: 2573892861706803021}
 --- !u!222 &5090286982658766977
 CanvasRenderer:
   m_ObjectHideFlags: 0

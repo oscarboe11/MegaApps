@@ -35,19 +35,4 @@ public class AppRepository
     public void SetApp() {}
 
     public void AddApp() {}
-
-    public Dictionary<string, App> SearchAppRepository(string searchTerms) {
-        Dictionary<string, App> searchResults = new Dictionary<string, App>();
-        foreach (KeyValuePair<string, App> app in this.GetApps()) {
-            if (app.key().IndexOf(searchTerms, StringComparison.OrdinalIgnoreCase) >= 0) {
-                searchResults.Add(app.key, app.Value);
-            }
-        }
-
-        foreach (KeyValuePair<string, App> app in searchResults) {
-            Debug.Log(app.Value.GetName()); 
-        }
-
-        return searchResults;
-    }
 }

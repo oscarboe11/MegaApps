@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Events : MonoBehaviour
 {
     private static Dictionary<string, App> appRepository = new AppRepository().GetApps();
+    public GameObject searchBar;
     
     public static void InitiateMenu(GameObject prefab, GameObject parent) {
         if (prefab != null && parent != null) {
@@ -52,6 +53,22 @@ public class Events : MonoBehaviour
     }
 
     public static void SearchApps(string searchTerms) {
-        
+        Dictionary<string, App> searchResults = SearchAppRepository(searchTerms);
+
+        foreach (KeyValuePair<string, App> app in searchResults) {
+            Debug.Log(app.Key);
+        }
+    }
+
+    private static Dictionary<string, App> SearchAppRepository(string searchTerms) {
+        Dictionary<string, App> searchResults = new Dictionary<string, App>();
+
+        foreach (KeyValuePair<string, App> app in appRepository) {
+            if (app.Key.IndexOf(searchTerms, System.StringComparison.OrdinalIgnoreCase) >= 0) {
+                searchResults.Add(app.Key, app.Value);
+            }
+        }
+
+        return searchResults;
     }
 }

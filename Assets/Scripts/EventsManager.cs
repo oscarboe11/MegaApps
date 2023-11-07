@@ -10,6 +10,7 @@ public class EventsManager : MonoBehaviour
 {
     public GameObject AppButton;
     public GameObject MainMenuContent;
+    public GameObject SearchBar;
     
     void Start()    
     {
@@ -18,7 +19,8 @@ public class EventsManager : MonoBehaviour
 
     void Update()
     {
-        Events.SearchApps();
+        TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
+        Events.SearchApps(searchText.text);
     }
 
     void FixedUpdate() {
