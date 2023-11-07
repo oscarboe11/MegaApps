@@ -16,11 +16,13 @@ public class EventsManager : MonoBehaviour
     {
         Events.InitiateMenu(AppButton, MainMenuContent);
     }
-
-    void Update()
-    {
+    void Update() {
         TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
-        Events.SearchApps(searchText.text);
+        string searchTextString;
+        if(searchText.text.Length > 0) {
+            searchTextString = searchText.text.Substring(0, searchText.text.Length - 1);
+            Events.SearchApps(searchTextString);
+        }
     }
 
     void FixedUpdate() {
