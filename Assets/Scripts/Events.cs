@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Events : MonoBehaviour
 {
@@ -52,13 +53,65 @@ public class Events : MonoBehaviour
         gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
     }
 
-    public static void SearchApps(string searchTerms) {
-        Dictionary<string, App> searchResults = SearchAppRepository(searchTerms);
-
-        foreach (KeyValuePair<string, App> app in searchResults) {
-            Debug.Log(app.Key);
+    public static void InitiateSearchPage(GameObject prefab, GameObject parent, GameObject SearchBar) {
+        string searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>().text;
+        if(searchText.Length > 1) {
+            searchText = searchText.Substring(0, searchText.Length - 1);
+            Dictionary<string, App> searchResults = SearchAppRepository(searchText);
+            DeleteAppButton(parent, searchResults);
+            if (prefab != null && parent != null) {
+                foreach (KeyValuePair<string, App> app in searchResults) {
+                    if(CheckAppButtonExist(parent, app)) {
+                        continue;
+                    }
+                    GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
+                    AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
+                    //Debug.Log(app.Value.getName());
+                    TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
+                    if(ButtonText != null) {
+                        // ButtonText.text = app.Value.GetName();
+                        ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
+                    }
+                }
+            }
         }
     }
+
+    private static void DeleteAppButton(GameObject parent, Dictionary<string, App> searchApp) {
+        Transform parentTransform = parent.transform;
+        if(parentTransform.childCount > 0) {
+            for (int i = 0; i < parentTransform.childCount; i++) {
+                // Access each child using the GetChild method
+                GameObject child = parentTransform.GetChild(i).gameObject;
+                if(!searchApp.ContainsKey(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
+                    Destroy(child);
+                }
+            }
+        }
+    }
+
+    private static bool CheckAppButtonExist(GameObject parent, KeyValuePair<string, App> app) {
+        bool isExist = false;
+        Transform parentTransform = parent.transform;
+        if(parentTransform.childCount > 0) {
+            for (int i = 0; i < parentTransform.childCount; i++) {
+                // Access each child using the GetChild method
+                GameObject child = parentTransform.GetChild(i).gameObject;
+                if(app.Value.GetName() == child.GetComponent<AppObject>().GetAppInfo().GetName()) {
+                    isExist = true;
+                }
+            }
+        }
+        return isExist;
+    } 
+
+    // public static void SearchApps(string searchTerms) {
+    //     Dictionary<string, App> searchResults = SearchAppRepository(searchTerms);
+
+    //     // foreach (KeyValuePair<string, App> app in searchResults) {
+    //     //     Debug.Log(app.Key);
+    //     // }
+    // }
 
     private static Dictionary<string, App> SearchAppRepository(string searchTerms) {
         Dictionary<string, App> searchResults = new Dictionary<string, App>();

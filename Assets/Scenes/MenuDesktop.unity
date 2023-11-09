@@ -3915,6 +3915,8 @@ MonoBehaviour:
   MainMenu: {fileID: 1847745156000274840}
   CategoryPage: {fileID: 6083500838760882977}
   AppPage: {fileID: 2563360438963328808}
+  SearchPage: {fileID: 99278266}
+  SearchBar: {fileID: 508762405726311539}
 --- !u!222 &4083065686122503764
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4644,6 +4646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppButton: {fileID: 6527194139504102231, guid: d3b05ef5c498c4042a8e23f400ac145f, type: 3}
   MainMenuContent: {fileID: 8207661157386705587}
+  SearchMenuContent: {fileID: 678395129}
   SearchBar: {fileID: 2573892861706803021}
 --- !u!222 &5090286982658766977
 CanvasRenderer:

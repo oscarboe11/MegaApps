@@ -10,6 +10,7 @@ public class EventsManager : MonoBehaviour
 {
     public GameObject AppButton;
     public GameObject MainMenuContent;
+    public GameObject SearchMenuContent;
     public GameObject SearchBar;
     
     void Start()    
@@ -17,19 +18,16 @@ public class EventsManager : MonoBehaviour
         Events.InitiateMenu(AppButton, MainMenuContent);
     }
     void Update() {
-        TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
-        string searchTextString;
-        if(searchText.text.Length > 0) {
-            searchTextString = searchText.text.Substring(0, searchText.text.Length - 1);
-            Events.SearchApps(searchTextString);
-        }
+        // TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
+        // Events.InitiateSearchPage(AppButton, MainMenuContent, searchText.text);
+        // TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
+        // string searchTextString;
+        // if(searchText.text.Length > 0) {
+        //     searchTextString = searchText.text.Substring(0, searchText.text.Length - 1);
+        //     Events.SearchApps(searchTextString);
     }
-
+    
     void FixedUpdate() {
-        
-    }
-
-    void Awake() {
-
+        Events.InitiateSearchPage(AppButton, SearchMenuContent, SearchBar);
     }
 }
