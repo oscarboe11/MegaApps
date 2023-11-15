@@ -1,5 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using PlayFab.DataModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,6 +68,7 @@ public class Events : MonoBehaviour
                     if(CheckAppButtonExist(parent, app)) {
                         continue;
                     }
+                    
                     GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
                     AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
                     //Debug.Log(app.Value.getName());
@@ -77,13 +82,44 @@ public class Events : MonoBehaviour
         }
     }
 
+    // private static void DeleteAppButton(GameObject parent, Dictionary<string, App> searchApp) {
+    //     Transform parentTransform = parent.transform;
+    //     if(parentTransform.childCount > 0) {
+    //         for (int i = 0; i < parentTransform.childCount; i++) {
+    //             // Access each child using the GetChild method
+    //             GameObject child = parentTransform.GetChild(i).gameObject;
+    //             if(!searchApp.ContainsKey(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
+    //                 Destroy(child);
+    //             }
+    //         }
+    //     }
+    // }
+
     private static void DeleteAppButton(GameObject parent, Dictionary<string, App> searchApp) {
+    Transform parentTransform = parent.transform;
+    if (parentTransform.childCount > 0) {
+        for (int i = 0; i < parentTransform.childCount; i++) {
+            GameObject child = parentTransform.GetChild(i).gameObject;
+            AppObject appObject = child.GetComponent<AppObject>();
+            
+            if (appObject != null) {
+                App appInfo = appObject.GetAppInfo();
+                
+                if (appInfo != null && !searchApp.ContainsKey(appInfo.GetName())) {
+                    Destroy(child);
+                }
+            }
+        }
+    }
+}
+
+    private static void DeleteAppButton(GameObject parent, List<string> apps) {
         Transform parentTransform = parent.transform;
         if(parentTransform.childCount > 0) {
             for (int i = 0; i < parentTransform.childCount; i++) {
                 // Access each child using the GetChild method
                 GameObject child = parentTransform.GetChild(i).gameObject;
-                if(!searchApp.ContainsKey(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
+                if(!apps.Contains(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
                     Destroy(child);
                 }
             }
@@ -97,21 +133,15 @@ public class Events : MonoBehaviour
             for (int i = 0; i < parentTransform.childCount; i++) {
                 // Access each child using the GetChild method
                 GameObject child = parentTransform.GetChild(i).gameObject;
-                if(app.Value.GetName() == child.GetComponent<AppObject>().GetAppInfo().GetName()) {
-                    isExist = true;
-                }
+            AppObject appObject = child.GetComponent<AppObject>();
+            if (appObject != null && appObject.GetAppInfo() != null &&
+                app.Value.GetName() == appObject.GetAppInfo().GetName()) {
+                isExist = true;
+            }
             }
         }
         return isExist;
     } 
-
-    // public static void SearchApps(string searchTerms) {
-    //     Dictionary<string, App> searchResults = SearchAppRepository(searchTerms);
-
-    //     // foreach (KeyValuePair<string, App> app in searchResults) {
-    //     //     Debug.Log(app.Key);
-    //     // }
-    // }
 
     private static Dictionary<string, App> SearchAppRepository(string searchTerms) {
         Dictionary<string, App> searchResults = new Dictionary<string, App>();
@@ -127,5 +157,51 @@ public class Events : MonoBehaviour
         }
 
         return searchResults;
+    }
+
+    public static void InitiateCategoryOptions(GameObject dropdown) {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Categories.txt");
+
+        StreamReader file = new StreamReader(filePath);
+        List<string> categories = new List<string>();
+
+        while(!file.EndOfStream) {
+            categories.Add(file.ReadLine());
+        }
+
+        TMP_Dropdown m_Dropdown = dropdown.GetComponentInChildren<TMP_Dropdown>();
+        m_Dropdown.ClearOptions();
+        
+        m_Dropdown.AddOptions(categories);
+    }
+
+    public static void InitiateCategoryMenu(GameObject prefab, GameObject parent, GameObject dropdown) {
+        int categoryIndex = dropdown.GetComponentInChildren<TMP_Dropdown>().value;
+        string category = dropdown.GetComponentInChildren<TMP_Dropdown>().options[categoryIndex].text;
+        Dictionary<string, App> apps = new Dictionary<string, App>();
+
+        foreach(KeyValuePair<string, App> app in appRepository) {
+            string appCat = app.Value.GetCategory().Trim();
+            if(appCat.Equals(category)) {
+                apps.Add(app.Key, app.Value);
+            }
+        }
+
+        DeleteAppButton(parent, apps);
+
+        if (prefab != null && parent != null) {
+                foreach (KeyValuePair<string, App> app in apps) {
+                    if(CheckAppButtonExist(parent, app)) {
+                        continue;
+                    }
+
+                    GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
+                    AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
+                    TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
+                    if(ButtonText != null) {
+                        ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
+                    }
+                }
+            }
     }
 }

@@ -16,10 +16,10 @@ public class App {
     public App(List<string> appInfo) {
         name = appInfo[0];
         description = appInfo[1];
-        category = appInfo[2];
+        category = appInfo[5];
         platform = appInfo[3];
         version = appInfo[4];
-        organization = appInfo[5];
+        organization = appInfo[2];
         link = appInfo[6];
         price = appInfo[7];
         comments = new List<string>();

@@ -12,10 +12,14 @@ public class EventsManager : MonoBehaviour
     public GameObject MainMenuContent;
     public GameObject SearchMenuContent;
     public GameObject SearchBar;
+    public GameObject CategoriesDropDown;
+    public GameObject CategoriesContent;
     
     void Start()    
     {
         Events.InitiateMenu(AppButton, MainMenuContent);
+        Events.InitiateCategoryOptions(CategoriesDropDown);
+
     }
     void Update() {
         // TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
@@ -29,5 +33,6 @@ public class EventsManager : MonoBehaviour
     
     void FixedUpdate() {
         Events.InitiateSearchPage(AppButton, SearchMenuContent, SearchBar);
+        Events.InitiateCategoryMenu(AppButton, CategoriesContent, CategoriesDropDown);
     }
 }
