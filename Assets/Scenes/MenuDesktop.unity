@@ -5208,7 +5208,7 @@ MonoBehaviour:
   CategoryPage: {fileID: 6083500838760882977}
   AppPage: {fileID: 2563360438963328808}
   SearchPage: {fileID: 99278266}
-  SearchBar: {fileID: 508762405726311539}
+  SearchBar: {fileID: 2573892861706803021}
 --- !u!222 &4083065686122503764
 CanvasRenderer:
   m_ObjectHideFlags: 0

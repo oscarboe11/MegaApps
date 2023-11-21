@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,12 +18,15 @@ public class UIManager : MonoBehaviour
     public GameObject SearchBar;
     
     void Start() {
-        SearchBar.GetComponent<InputField>().onEndEdit.AddListener(OnInputFieldEndEdit);
+        SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onEndEditHandler);
+    }
+
+    private void onEndEditHandler(string arg0)
+    {
+        Search();
     }
 
     public void Login() {
-        //isSearch = false;
-        SearchBar.GetComponent<TextMeshProUGUI>().text = "";
         LoginPage.SetActive(true);
         MainMenu.SetActive(false);
         CategoryPage.SetActive(false);
@@ -31,8 +35,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void Discover() {
-        //isSearch = false;
-        SearchBar.GetComponent<TextMeshProUGUI>().text = "";
         MainMenu.SetActive(true);
         CategoryPage.SetActive(false);
         LoginPage.SetActive(false);
@@ -41,8 +43,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void Categories() {
-        //isSearch = false;
-        SearchBar.GetComponent<TextMeshProUGUI>().text = "";
         CategoryPage.SetActive(true);
         MainMenu.SetActive(false);
         LoginPage.SetActive(false);
@@ -51,8 +51,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void ViewApp(AppObject appObject) {
-        //isSearch = false;
-        SearchBar.GetComponent<TextMeshProUGUI>().text = "";
         Events.InitiateAppPage(AppPage, appObject);
         AppPage.SetActive(true);
         MainMenu.SetActive(false);
@@ -61,7 +59,7 @@ public class UIManager : MonoBehaviour
         SearchPage.SetActive(false);
     }
 
-    public void Search() {
+    void Search() {
         SearchPage.SetActive(true);
         LoginPage.SetActive(false);
         MainMenu.SetActive(false);
