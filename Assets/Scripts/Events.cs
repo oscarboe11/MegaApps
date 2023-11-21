@@ -205,7 +205,7 @@ public class Events : MonoBehaviour
             if(lines[i].Split().Length > 2) {
                 string thisName = lines[i].Split(':')[1];
                 if(thisName == name) {
-                    string c = lines[i+1].Split()[1];
+                    string c = lines[i+1].Split(':')[1];
                     comment = c;
                     // Debug.Log(comment);
                     break;
