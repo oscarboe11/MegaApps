@@ -32,6 +32,8 @@ public class AppRepository
         return this.repository;
     }
 
+    public void SetApp() {}
+
     public void AddApp(App app) {
         repository.Add(app.GetName(), app);
     }

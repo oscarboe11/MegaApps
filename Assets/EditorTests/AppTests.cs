@@ -9,10 +9,10 @@ public class AppTests
     List<string> testAppInfo =  new List<string> {
         "Hello Worlds",
         "This app is used for test.",
-        "Test",
+        "Mega Apps",
         "Desktop",
         "1.0.0",
-        "Mega Apps",
+        "Test",
         "http://www.MegaApp.com",
         "Free",
     };
