@@ -8,8 +8,8 @@ public class AppObject : MonoBehaviour
     private App thisApp;
 
     public void OnButtonClick() {
-        GameObject canvas = this.transform.parent.parent.parent.parent.gameObject;
-        // Debug.Log(canvas.name);
+        GameObject canvas = GameObject.Find("Canvas");
+        Debug.Log(canvas.name);
         GameObject uimanager = canvas.transform.Find("UIManager").gameObject;
         uimanager.GetComponent<UIManager>().ViewApp(this);
     }

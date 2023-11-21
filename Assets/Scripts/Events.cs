@@ -113,19 +113,6 @@ public class Events : MonoBehaviour
     }
 }
 
-    private static void DeleteAppButton(GameObject parent, List<string> apps) {
-        Transform parentTransform = parent.transform;
-        if(parentTransform.childCount > 0) {
-            for (int i = 0; i < parentTransform.childCount; i++) {
-                // Access each child using the GetChild method
-                GameObject child = parentTransform.GetChild(i).gameObject;
-                if(!apps.Contains(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
-                    Destroy(child);
-                }
-            }
-        }
-    }
-
     private static bool CheckAppButtonExist(GameObject parent, KeyValuePair<string, App> app) {
         bool isExist = false;
         Transform parentTransform = parent.transform;
@@ -191,10 +178,21 @@ public class Events : MonoBehaviour
 
         if (prefab != null && parent != null) {
                 foreach (KeyValuePair<string, App> app in apps) {
+                    // if(CheckAppButtonExist(parent, app)) {
+                    //     continue;
+                    // }
+
+                    // GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
+                    // AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
+                    // TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
+                    // if(ButtonText != null) {
+                    //     ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
+                    // }
+
                     if(CheckAppButtonExist(parent, app)) {
                         continue;
                     }
-
+                    
                     GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
                     AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
                     TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
