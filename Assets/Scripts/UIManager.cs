@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject AppPage;
     public GameObject SearchPage;
     public GameObject SearchBar;
+    public GameObject CommentPrefab;
     
     void Start() {
         SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onEndEditHandler);
@@ -51,7 +52,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void ViewApp(AppObject appObject) {
-        Events.InitiateAppPage(AppPage, appObject);
+        Events.InitiateAppPage(AppPage, appObject, CommentPrefab);
         AppPage.SetActive(true);
         MainMenu.SetActive(false);
         CategoryPage.SetActive(false);
