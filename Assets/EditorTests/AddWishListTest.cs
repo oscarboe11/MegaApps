@@ -6,20 +6,24 @@ using UnityEngine.TestTools;
 
 public class AddWishListTest
 {
+    List<string> testAppInfo =  new List<string> {
+            "Hello Worlds",
+            "This app is used for test.",
+            "Mega Apps",
+            "Desktop",
+            "1.0.0",
+            "Test",
+            "http://www.MegaApp.com",
+            "Free",
+        };
+
     // A Test behaves as an ordinary method
     [Test]
-    public void AddWishListTestSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
+    public void TestAddToWishList() {
+        User testU = new User("tester", "12345");
+        App testA = new App(testAppInfo);
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator AddWishListTestWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        testU.addToWishList(testA);
+        Assert.True(testU.getWishList().Contains(testA));
     }
 }
