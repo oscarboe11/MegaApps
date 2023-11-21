@@ -1,4 +1,5 @@
 ﻿Name: Your Music
+Comment: This app is not good​
 Comment: This app is good​
 Name: Weather Watch
 Name: Fitness Tracker

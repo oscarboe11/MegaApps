@@ -16,15 +16,22 @@ public class UIManager : MonoBehaviour
     public GameObject AppPage;
     public GameObject SearchPage;
     public GameObject SearchBar;
+    public GameObject CommentInput;
     public GameObject CommentPrefab;
     
     void Start() {
-        SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onEndEditHandler);
+        SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onSearchEndEditHandler);
+        CommentInput.GetComponent<TMP_InputField>().onEndEdit.AddListener(onCommentEndEditHandler);
     }
 
-    private void onEndEditHandler(string arg0)
+    private void onSearchEndEditHandler(string arg0)
     {
         Search();
+    }
+
+    private void onCommentEndEditHandler(string arg0)
+    {
+        Events.WriteComment(AppPage, CommentInput, CommentPrefab);
     }
 
     public void Login() {
