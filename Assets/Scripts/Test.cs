@@ -12,6 +12,9 @@ public class Test : MonoBehaviour
     // public GameObject MainMenuContent;
     // public GameObject Debug;
     public GameObject searchBar;
+    public GameObject CommentInput;
+    public GameObject CommentPrefab;
+    public GameObject AppPage;
     void Start()
     {
         // TDD test for initiate main menu
@@ -21,7 +24,14 @@ public class Test : MonoBehaviour
         //     Debug.GetComponent<TextMeshProUGUI>().text = "Error";
         // }
         // Debug.GetComponent<TextMeshProUGUI>().text = appRepository[" Your Music"].GetName();
+        CommentInput.GetComponent<TMP_InputField>().onEndEdit.AddListener(onEndEditHandler);
 
+    }
+
+    private void onEndEditHandler(string arg0)
+    {
+        Events.WriteComment(AppPage, CommentInput, CommentPrefab);
+        Console.WriteLine("asdfasdfdsafasdf");
     }
 
     void Update()

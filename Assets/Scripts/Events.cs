@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +11,7 @@ public class Events : MonoBehaviour
 {
     private static Dictionary<string, App> appRepository = new AppRepository().GetApps();
     public GameObject searchBar;
-    
+
     public static void InitiateMenu(GameObject prefab, GameObject parent) {
         if (prefab != null && parent != null) {
             foreach (KeyValuePair<string, App> app in appRepository) {
@@ -25,32 +27,39 @@ public class Events : MonoBehaviour
         }
     }
 
-    public static void InitiateAppPage(GameObject AppPage, AppObject appObject) {
+    public static void InitiateAppPage(GameObject AppPage, AppObject appObject, GameObject CommentPrefab) {
         App app = appObject.GetAppInfo();
-        GameObject gameObject = AppPage.transform.Find("Info").Find("Name").gameObject;
+        GameObject Info = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
+        GameObject gameObject = Info.transform.Find("Name").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = app.GetName();
 
-        gameObject = AppPage.transform.Find("Info").Find("Description").gameObject;
+        gameObject = Info.transform.Find("Description").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Description: " + app.GetDescription();
 
-        gameObject = AppPage.transform.Find("Info").Find("Organization").gameObject;
+        gameObject = Info.transform.Find("Organization").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Organization: " + app.GetOrganization();
 
-        gameObject = AppPage.transform.Find("Info").Find("Platform").gameObject;
+        gameObject = Info.transform.Find("Platform").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Description: " + app.GetPlatform();
 
-        gameObject = AppPage.transform.Find("Info").Find("Version").gameObject;
+        gameObject = Info.transform.Find("Version").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Version: " + app.GetVersion();
         //Debug.Log(app.GetVersion());
 
-        gameObject = AppPage.transform.Find("Info").Find("Category").gameObject;
+        gameObject = Info.transform.Find("Category").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Category: " + app.GetCategory();
 
-        gameObject = AppPage.transform.Find("Info").Find("Link").gameObject;
+        gameObject = Info.transform.Find("Link").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Link: " + app.GetLink();
 
-        gameObject = AppPage.transform.Find("Info").Find("Price").gameObject;
+        gameObject = Info.transform.Find("Price").gameObject;
         gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
+
+        gameObject = Info.transform.Find("Comments").gameObject;
+        if(gameObject.transform.childCount <= 1) {
+            Debug.Log("Comment Initiating");
+            InitiateComment(AppPage, CommentPrefab);
+        }
     }
 
     public static void InitiateSearchPage(GameObject prefab, GameObject parent, GameObject SearchBar) {
@@ -127,5 +136,84 @@ public class Events : MonoBehaviour
         }
 
         return searchResults;
+    }
+
+    public static void WriteComment(GameObject AppPage, GameObject CommentInputField, GameObject CommentPrefab) {
+        GameObject AppName = AppPage.transform.Find("Viewport").Find("Content").Find("Info").Find("Name").gameObject;
+        string name = AppName.GetComponent<TextMeshProUGUI>().text;
+        // name = name.Substring(1, name.Length - 1);
+        // Debug.Log(AppName);
+        string comment = CommentInputField.GetComponentInChildren<TextMeshProUGUI>().text;
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Comments.txt");
+        string[] lines = File.ReadAllLines(filePath);
+        string[] newlines = new string[lines.Length + 1];
+        int j = 0;
+        for(int i = 0; i < lines.Length; i++) {
+            newlines[j] = lines[i];
+            j++;
+            if(lines[i].Split().Length > 2) {
+                string thisName = lines[i].Split(':')[1];
+                if(thisName == name) {
+                    // Debug.Log("I found at" + i);
+                    newlines[j] = "Comment: " + comment;
+                    j++;
+                }
+            }
+        }
+        File.WriteAllLines(filePath, newlines, Encoding.UTF8);
+        UpdateComment(AppPage, CommentPrefab);
+        // Debug.Log("Write Done");
+    }
+
+    private static void InitiateComment(GameObject AppPage, GameObject CommentPrefab) {
+        GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
+        string name = AppInfo.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
+        GameObject Comments = AppInfo.transform.Find("Comments").gameObject;
+        string comment = "";
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Comments.txt");
+        string[] lines = File.ReadAllLines(filePath);
+        for(int i = 0; i < lines.Length; i++) {
+            if(lines[i].Split().Length > 2) {
+                string thisName = lines[i].Split(':')[1];
+                if(thisName == name) {
+                    for(int j = i+1; j < lines.Length; j++) {
+                        if(lines[j].Split(':')[0] == "Comment") {
+                            comment = lines[j].Split(':')[1];
+                            Debug.Log(comment);
+                            CommentPrefab.GetComponent<TextMeshProUGUI>().text = comment;
+                            Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        CommentPrefab.GetComponent<TextMeshProUGUI>().text = comment;
+        GameObject CommentObject = Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
+    }
+
+    private static void UpdateComment(GameObject AppPage, GameObject CommentPrefab) {
+        GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
+        string name = AppInfo.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
+        GameObject Comments = AppInfo.transform.Find("Comments").gameObject;
+        string comment = "";
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Comments.txt");
+        string[] lines = File.ReadAllLines(filePath);
+        for(int i = 0; i < lines.Length; i++) {
+            if(lines[i].Split().Length > 2) {
+                string thisName = lines[i].Split(':')[1];
+                if(thisName == name) {
+                    string c = lines[i+1].Split()[1];
+                    comment = c;
+                    // Debug.Log(comment);
+                    break;
+                }
+            }
+        }
+        CommentPrefab.GetComponent<TextMeshProUGUI>().text = comment;
+        Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
+        // CommentObject.GetComponent<TextMeshProUGUI>().text = comment;
     }
 }

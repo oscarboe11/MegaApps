@@ -87,6 +87,7 @@ Version: 1.1.0
 Category: Games
 Link: www.app10.com
 Price: Free
+
 Name: Task Manager Pro
 Description: Keep track of your tasks and to-dos with this advanced task management app.
 Organization: TaskMaster Inc
