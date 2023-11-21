@@ -3528,7 +3528,7 @@ GameObject:
   - component: {fileID: 2039197915}
   - component: {fileID: 2039197914}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MegaApp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7002,7 +7002,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4445800814346298786}
   m_HandleRect: {fileID: 2929628066763431193}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7825,7 +7825,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 652095344007107935}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5317
+  m_Size: 0.53169996
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
