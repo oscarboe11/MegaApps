@@ -2,15 +2,23 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;  
 
 public class AppRepository
 {
     // private FileStream file = new FileStream("Apps.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
     // private StreamReader file = new StreamReader(@"Assets\Scripts\Apps.txt");
-    private string filePath = Path.Combine(Application.streamingAssetsPath, "Apps.txt");
+    // private string filePath = Path.Combine(Application.streamingAssetsPath, "Apps.txt");
+    private string filePath = "StreamingAssets/Apps.txt";
     private Dictionary<string, App> repository = new Dictionary<string, App>();
 
     public AppRepository() {
+        if(Application.platform == RuntimePlatform.WebGLPlayer) {
+            filePath = "StreamingAssets/Apps.txt";
+        } else {
+            filePath = Path.Combine(Application.streamingAssetsPath, "Apps.txt");
+        }
+
         StreamReader file = new StreamReader(filePath);
         List<string> appInfo = new List<string>();
         string[] line;
@@ -26,6 +34,8 @@ public class AppRepository
                 }
             }
         }
+
+        file.Close();
     }
 
     public Dictionary<string, App> GetApps() { 
