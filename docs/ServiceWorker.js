@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-MegaApps-1.0";
 const contentToCache = [
-    "Build/webbuild2.loader.js",
-    "Build/webbuild2.framework.js",
-    "Build/webbuild2.data",
-    "Build/webbuild2.wasm",
+    "Build/docs.loader.js",
+    "Build/docs.framework.js",
+    "Build/docs.data",
+    "Build/docs.wasm",
     "TemplateData/style.css"
 
 ];
