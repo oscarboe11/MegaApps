@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,16 +33,14 @@ public class UIManager : MonoBehaviour
         CommentInput.GetComponent<TMP_InputField>().onEndEdit.AddListener(onCommentEndEditHandler);
     }
 
-    private void onSearchEndEditHandler(string arg0) {
-        Events.InitiateSearchPage(AppButton, SearchPage, SearchBar);
+    private void onSearchEndEditHandler(string arg0)
+    {
+        Search();
     }
 
-    private void onCommentEndEditHandler(string arg0) {
-        
-    }
-    
-    private void onEndEditHandler(string arg0) {
-        Search();
+    private void onCommentEndEditHandler(string arg0)
+    {
+        Events.WriteComment(AppPage, CommentInput, CommentPrefab);
     }
 
     public void Login() {

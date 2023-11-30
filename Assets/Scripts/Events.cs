@@ -69,10 +69,8 @@ public class Events : MonoBehaviour
         gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
 
         gameObject = Info.transform.Find("Comments").gameObject;
-        if(gameObject.transform.childCount <= 1) {
-            Debug.Log("Comment Initiating");
-            InitiateComment(AppPage, CommentPrefab);
-        }
+        DeleteComment(AppPage);
+        InitiateComment(AppPage, CommentPrefab);
     }
 
     public static void InitiateSearchPage(GameObject prefab, GameObject parent, GameObject SearchBar) {
@@ -188,6 +186,7 @@ public class Events : MonoBehaviour
         }
         File.WriteAllLines(filePath, newlines, Encoding.UTF8);
         UpdateComment(AppPage, CommentPrefab);
+        CommentInputField.GetComponentInChildren<TextMeshProUGUI>().text = " ";
         // Debug.Log("Write Done");
     }
 
@@ -218,6 +217,16 @@ public class Events : MonoBehaviour
         }
         CommentPrefab.GetComponent<TextMeshProUGUI>().text = comment;
         GameObject CommentObject = Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
+    }
+
+    private static void DeleteComment(GameObject AppPage) {
+        GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
+        GameObject Comments = AppInfo.transform.Find("Comments").gameObject;
+        foreach(Transform child in Comments.transform) {
+            if(child.gameObject.name != "Title") {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     private static void UpdateComment(GameObject AppPage, GameObject CommentPrefab) {
@@ -275,17 +284,6 @@ public class Events : MonoBehaviour
 
         if (prefab != null && parent != null) {
                 foreach (KeyValuePair<string, App> app in apps) {
-                    // if(CheckAppButtonExist(parent, app)) {
-                    //     continue;
-                    // }
-
-                    // GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
-                    // AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
-                    // TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
-                    // if(ButtonText != null) {
-                    //     ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
-                    // }
-
                     if(CheckAppButtonExist(parent, app)) {
                         continue;
                     }
