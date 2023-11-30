@@ -10,20 +10,39 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("UI")]
+    public GameObject AppButton;
+    public GameObject PendingAppButton;
     public GameObject LoginPage;
     public GameObject MainMenu;
     public GameObject CategoryPage;
     public GameObject AppPage;
     public GameObject SearchPage;
     public GameObject SearchBar;
+    public GameObject CommentInput;
     public GameObject CommentPrefab;
+    public GameObject AddAppPage;
+    public GameObject PendingAppPage;
+    public GameObject AppTemplatePage;
+    public GameObject AddAppAdmin;
+    public GameObject MainMenuContent;
+    public GameObject PendingListContent;
     
     void Start() {
-        SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onEndEditHandler);
+        Events.InitiateMenu(AppButton, MainMenuContent);
+        Events.InitiatePendingList(PendingAppButton, PendingListContent);
+        SearchBar.GetComponent<TMP_InputField>().onValueChanged.AddListener(onSearchEndEditHandler);
+        CommentInput.GetComponent<TMP_InputField>().onEndEdit.AddListener(onCommentEndEditHandler);
     }
 
-    private void onEndEditHandler(string arg0)
-    {
+    private void onSearchEndEditHandler(string arg0) {
+        Events.InitiateSearchPage(AppButton, SearchPage, SearchBar);
+    }
+
+    private void onCommentEndEditHandler(string arg0) {
+        
+    }
+    
+    private void onEndEditHandler(string arg0) {
         Search();
     }
 
@@ -33,14 +52,21 @@ public class UIManager : MonoBehaviour
         CategoryPage.SetActive(false);
         AppPage.SetActive(false);
         SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
     }
 
     public void Discover() {
+        Events.UpdateMainMenu(AppButton, MainMenuContent);
         MainMenu.SetActive(true);
         CategoryPage.SetActive(false);
         LoginPage.SetActive(false);
         AppPage.SetActive(false);
         SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
     }
 
     public void Categories() {
@@ -49,6 +75,9 @@ public class UIManager : MonoBehaviour
         LoginPage.SetActive(false);
         AppPage.SetActive(false);
         SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
     }
 
     public void ViewApp(AppObject appObject) {
@@ -58,13 +87,66 @@ public class UIManager : MonoBehaviour
         CategoryPage.SetActive(false);
         LoginPage.SetActive(false);
         SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
     }
 
-    void Search() {
+    public void ViewPendingApp(AppObject appObject) {
+        Events.InitiatePendingAppPage(PendingAppPage, appObject);
+        PendingAppPage.SetActive(true);
+        AppPage.SetActive(false);
+        MainMenu.SetActive(false);
+        CategoryPage.SetActive(false);
+        LoginPage.SetActive(false);
+        SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
+    }
+
+    public void Search() {
         SearchPage.SetActive(true);
         LoginPage.SetActive(false);
         MainMenu.SetActive(false);
         CategoryPage.SetActive(false);
         AppPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
+    }
+
+    public void AddApp() {
+        Events.UpdatePendingList(PendingAppButton, PendingListContent);
+        AddAppPage.SetActive(true);
+        MainMenu.SetActive(false);
+        CategoryPage.SetActive(false);
+        LoginPage.SetActive(false);
+        AppPage.SetActive(false);
+        SearchPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+        AppTemplatePage.SetActive(false);
+    }
+
+    public void AppRequest() {
+        AppTemplatePage.SetActive(true);
+        LoginPage.SetActive(false);
+        MainMenu.SetActive(false);
+        CategoryPage.SetActive(false);
+        AppPage.SetActive(false);
+        SearchPage.SetActive(false);
+        AddAppPage.SetActive(false);
+        PendingAppPage.SetActive(false);
+    }
+
+    public void SubmitRequest() {
+        Events.SubmitAppRequest(AppTemplatePage);
+    }
+
+    public void Approve() {
+        Events.ApproveNewApp(AddAppAdmin);
+    }
+
+    public void Reject() {
+        Events.RejectNewApp(AddAppAdmin);
     }
 }

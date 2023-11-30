@@ -9,10 +9,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 
 public class Events : MonoBehaviour
 {
-    private static Dictionary<string, App> appRepository = new AppRepository().GetApps();
+    private static AppRepository AppData = new AppRepository();
+    private static Dictionary<string, App> appRepository = AppData.GetApps();
+    private static Dictionary<string, App> pendingAppRepository = AppData.GetPendingApps();
     public GameObject searchBar;
 
     public static void InitiateMenu(GameObject prefab, GameObject parent) {
@@ -28,6 +31,13 @@ public class Events : MonoBehaviour
                 }
             }
         }
+    }
+
+    public static void UpdateMainMenu(GameObject prefab, GameObject parent) {
+        for (int i = 0; i < parent.transform.childCount; i++) {
+            Destroy(parent.transform.GetChild(i).gameObject);
+        }
+        InitiateMenu(prefab, parent);
     }
 
     public static void InitiateAppPage(GameObject AppPage, AppObject appObject, GameObject CommentPrefab) {
@@ -288,5 +298,106 @@ public class Events : MonoBehaviour
                     }
                 }
             }
+    }
+
+    public static void InitiatePendingList(GameObject prefab, GameObject parent) {
+        if (prefab != null && parent != null) {
+            foreach (KeyValuePair<string, App> app in pendingAppRepository) {
+                GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
+                AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
+                //Debug.Log(app.Value.getName());
+                TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
+                if(ButtonText != null) {
+                    // ButtonText.text = app.Value.GetName();
+                    ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
+                }
+            }
+        }
+    }
+    public static void UpdatePendingList(GameObject prefab, GameObject parent) {
+        for (int i = 0; i < parent.transform.childCount; i++) {
+            Destroy(parent.transform.GetChild(i).gameObject);
+        }
+        InitiatePendingList(prefab, parent);
+    }
+
+    public static void InitiatePendingAppPage(GameObject AppPage, AppObject appObject) {
+        App app = appObject.GetAppInfo();
+        GameObject Info = AppPage.transform.Find("Info").gameObject;
+        GameObject gameObject = Info.transform.Find("Name").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = app.GetName();
+
+        gameObject = Info.transform.Find("Description").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Description: " + app.GetDescription();
+
+        gameObject = Info.transform.Find("Organization").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Organization: " + app.GetOrganization();
+
+        gameObject = Info.transform.Find("Platform").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Description: " + app.GetPlatform();
+
+        gameObject = Info.transform.Find("Version").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Version: " + app.GetVersion();
+        //Debug.Log(app.GetVersion());
+
+        gameObject = Info.transform.Find("Category").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Category: " + app.GetCategory();
+
+        gameObject = Info.transform.Find("Link").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Link: " + app.GetLink();
+
+        gameObject = Info.transform.Find("Price").gameObject;
+        gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
+    }
+
+    public static void SubmitAppRequest(GameObject AddAppPage) {
+        List<string> pendingAppInfo = new List<string>();
+
+        GameObject input = AddAppPage.transform.Find("Name").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string name = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(name);
+
+        input = AddAppPage.transform.Find("Description").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string description = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(description);
+
+        input = AddAppPage.transform.Find("Organization").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string organization = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(organization);
+        
+        input = AddAppPage.transform.Find("Platform").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string platform = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(platform);
+        
+        input = AddAppPage.transform.Find("Version").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string version = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(version);
+
+        input = AddAppPage.transform.Find("Category").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string category = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(category);
+
+        input = AddAppPage.transform.Find("Link").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string link = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(link);
+
+        input = AddAppPage.transform.Find("Price").Find("InputField").Find("Text Area").Find("Input").gameObject;
+        string price = input.GetComponent<TextMeshProUGUI>().text;
+        pendingAppInfo.Add(price);
+
+        AppData.AddPendingApp(pendingAppInfo);
+    }
+
+    public static void ApproveNewApp(GameObject AddAppAdmin) {
+        string name = AddAppAdmin.transform.Find("Info").Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text;
+        App newApp = pendingAppRepository[name];
+        AppData.AddApp(newApp);
+        AppData.DeletePendingApp(newApp);
+    }
+
+    public static void RejectNewApp(GameObject AddAppAdmin) {
+        string name = AddAppAdmin.transform.Find("Info").Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text;
+        App newApp = pendingAppRepository[name];
+        AppData.DeletePendingApp(newApp);
     }
 }
