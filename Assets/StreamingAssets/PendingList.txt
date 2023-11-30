@@ -1,8 +1,8 @@
-﻿Name: 1​
-Description: 2​
-Organization: 3​
-Platform: 4​
-Version: 5​
-Category: 6​
-Link: 7.com​
-Price: 8​
+﻿Name:  Wanderlust Explorer
+Description:  Embark on a journey of discovery with Wanderlust Explorer – your passport to immersive travel experiences from the comfort of your device.
+Organization:  Global Adventures Co.
+Platform:  iOS, Android
+Version:  1.5.0
+Category:  Travel & Adventure
+Link:  www.wanderlustexplorerapp.com
+Price:  $0.99

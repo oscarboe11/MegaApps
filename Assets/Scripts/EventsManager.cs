@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class EventsManager : MonoBehaviour
 {
     public GameObject AppButton;
-    public GameObject MainMenuContent;
     public GameObject SearchMenuContent;
     public GameObject SearchBar;
     public GameObject CategoriesDropDown;
@@ -17,7 +16,6 @@ public class EventsManager : MonoBehaviour
     
     void Start()    
     {
-        Events.InitiateMenu(AppButton, MainMenuContent);
         Events.InitiateCategoryOptions(CategoriesDropDown);
 
     }

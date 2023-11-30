@@ -14,6 +14,13 @@ public class AppObject : MonoBehaviour
         uimanager.GetComponent<UIManager>().ViewApp(this);
     }
 
+    public void OnPendingButtonClick() {
+        GameObject canvas = GameObject.Find("Canvas");
+        Debug.Log(canvas.name);
+        GameObject uimanager = canvas.transform.Find("UIManager").gameObject;
+        uimanager.GetComponent<UIManager>().ViewPendingApp(this);
+    }
+
     public void SetAppInfo (App app) {
         thisApp = new App(app);
     }
