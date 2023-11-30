@@ -274,17 +274,6 @@ public class Events : MonoBehaviour
 
         if (prefab != null && parent != null) {
                 foreach (KeyValuePair<string, App> app in apps) {
-                    // if(CheckAppButtonExist(parent, app)) {
-                    //     continue;
-                    // }
-
-                    // GameObject AppButton = Instantiate(prefab, parent.GetComponent<Transform>());
-                    // AppButton.GetComponent<AppObject>().SetAppInfo(app.Value); 
-                    // TextMeshProUGUI  ButtonText = AppButton.GetComponentInChildren<TextMeshProUGUI>();
-                    // if(ButtonText != null) {
-                    //     ButtonText.text = AppButton.GetComponent<AppObject>().GetAppInfo().GetName();
-                    // }
-
                     if(CheckAppButtonExist(parent, app)) {
                         continue;
                     }
