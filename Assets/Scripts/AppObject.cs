@@ -10,7 +10,7 @@ public class AppObject : MonoBehaviour
 
     public void OnButtonClick() {
         GameObject canvas = GameObject.Find("Canvas");
-        Debug.Log(canvas.name);
+        //Debug.Log(canvas.name);
         GameObject uimanager = canvas.transform.Find("UIManager").gameObject;
         uimanager.GetComponent<UIManager>().ViewApp(this);
     }
