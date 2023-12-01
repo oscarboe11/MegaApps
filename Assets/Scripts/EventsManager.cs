@@ -17,6 +17,7 @@ public class EventsManager : MonoBehaviour
     void Start()    
     {
         Events.InitiateCategoryOptions(CategoriesDropDown);
+        Debug.Log(Application.platform.ToString());
 
     }
     void Update() {
