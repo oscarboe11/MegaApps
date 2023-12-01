@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEditor.Build.Content;
+//sing UnityEditor.Build.Content;
 using System.Text;
 
 public class AppRepository
