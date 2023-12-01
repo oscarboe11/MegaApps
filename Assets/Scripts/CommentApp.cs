@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,49 +11,46 @@ public class CommentApp : MonoBehaviour {
     public string commentText;
     public string appName;
 
+    //called to initalize the comment delete functionality
     public void Start() {
         Initialize();
     }
     public void Initialize() {   
-        commentText = this.GetComponentInChildren<TextMeshProUGUI>().text;
-        appName = transform.parent.parent.GetComponentInChildren<TextMeshProUGUI>().text;
+        commentText = this.GetComponentInChildren<TextMeshProUGUI>().text.Trim();
+        appName = transform.parent.parent.GetComponentInChildren<TextMeshProUGUI>().text.Trim();
         deleteButton.onClick.AddListener(DeleteComment);
     }
 
+    // handles comment deletion processes
     private void DeleteComment() {
         DeleteFromFile();
         
         Destroy(gameObject);
     }
 
+    // removes comment from contents to be written to file
     private void DeleteFromFile() {
         string filePath = Path.Combine(Application.streamingAssetsPath, "Comments.txt");
         string[] lines = File.ReadAllLines(filePath);
         List<string> result = new List<string>();
-        //string[] subs = lineList[0].Split(":");
+        Debug.Log(commentText);
         
         string current = "";
-        for(int i = 0; i < lines.Length; i++) {
-            string line = lines[i];
-            string[] subs = line.Split(":");
-            
-            if(subs[0].Equals("App")) {
-                current = subs[1];
+        foreach(string line in lines) {
+            string[] subs = line.Trim().Split(":");
+
+            string currentName = subs[0].Trim();
+            string currentText = subs[1].Trim();
+
+            if (currentName == "Name") {
+                current = currentText;
             }
 
-            if(!(current.Equals(appName) && subs[1].Equals(commentText))) {
+            if (!(string.Equals(current, appName, StringComparison.OrdinalIgnoreCase) && string.Equals(currentText, commentText, StringComparison.OrdinalIgnoreCase))) {
                 result.Add(line);
             }
         }
 
-        WriteToFile(result);
-    }
-
-    private void WriteToFile(List<string> contents) {
-        StreamWriter s = new StreamWriter(Path.Combine(Application.streamingAssetsPath, "Comments.txt"));
-
-        foreach(string line in contents) {
-            s.WriteLine(line);
-        }
+        File.WriteAllLines(filePath, result.ToArray());
     }
 }
