@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -14,9 +15,19 @@ public class PlayfabManager : MonoBehaviour
     public TMP_Text loginText;
     public TMP_InputField userName;
     public TMP_InputField userPsw;
+    public GameObject User;
 
     // Set and get user's permission.
     public void SetAdminPermission() {
+        var request = new UpdateUserDataRequest {
+            Data = new Dictionary<string, string> {
+                {"Permission", "Admin"}
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+    }
+
+    public void SetModPermission() {
         var request = new UpdateUserDataRequest {
             Data = new Dictionary<string, string> {
                 {"Permission", "Admin"}
@@ -46,9 +57,10 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("Reciedved User Permission.");
         if(result.Data != null && result.Data.ContainsKey("Permission")) {
             Debug.Log(result.Data["Permission"]);
+            User.GetComponent<User>().SetPermission(result.Data["Permission"].ToString());
         }
         else {
-            Debug.Log("User didn't set permission.");
+            User.GetComponent<User>().SetPermission("User");
         }
     }
 
@@ -81,12 +93,15 @@ public class PlayfabManager : MonoBehaviour
 
     void OnRegisterSuccess(RegisterPlayFabUserResult result) {
         message.text = "Registered and logged in!";
-        SetAdminPermission();
+        loginText.text = "Hi, " + userName.text;
+        SetUserPermission();
+        GetPermission();
     }
 
     void OnLoginSuccess(LoginResult result) {
         message.text = "Successful login!";
         loginText.text = "Hi, " + userName.text;
+        GetPermission();
     }
 
     // Error Message.

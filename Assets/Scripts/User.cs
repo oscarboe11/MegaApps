@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class User {
+public class User : MonoBehaviour {
     private string username;
     private string password;
+    private string permission = "";
     private bool loggedIn;
     private List<App> wishlist;
-
+    
     public User() {
         this.username = "";
         this.password = "";
@@ -33,12 +36,25 @@ public class User {
         return loggedIn;
     }
 
-    public void comment() {
-        // make comment
+    public void SetPermission(string permission) {
+        Debug.Log(permission);
+        PlayfabManager playfabManager = GetComponent<PlayfabManager>();
+        if(permission == "Admin") {
+            this.permission = permission;
+            playfabManager.SetAdminPermission();
+        }
+        else if(permission == "Moderator") {
+            this.permission = permission;
+            playfabManager.SetModPermission();
+        }
+        else {
+            this.permission = "User";
+            playfabManager.SetUserPermission();
+        }
     }
 
-    public void addToWishList(App app) {
-        // add to wishlist
+    public string GetPermission() {
+        return permission;
     }
 
     public List<App> getWishList() {
