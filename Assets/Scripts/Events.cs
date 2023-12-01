@@ -204,7 +204,7 @@ public class Events : MonoBehaviour
                     for(int j = i+1; j < lines.Length; j++) {
                         if(lines[j].Split(':')[0] == "Comment") {
                             comment = lines[j].Split(':')[1];
-                            Debug.Log(comment);
+                            //Debug.Log(comment);
                             CommentPrefab.GetComponent<TextMeshProUGUI>().text = comment;
                             Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
                         }
@@ -398,4 +398,6 @@ public class Events : MonoBehaviour
         App newApp = pendingAppRepository[name];
         AppData.DeletePendingApp(newApp);
     }
+
+    
 }

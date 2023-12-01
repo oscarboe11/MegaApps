@@ -1,8 +1,5 @@
-﻿Name: Your Music
-Comment: ​
-Comment: This app is good​
+Name: Your Music
 Name: Weather Watch
-Comment: This app is not good​
 Name: Fitness Tracker
 Name: Photo Editor Pro
 Name: Recipe Master
@@ -21,4 +18,3 @@ Name: Home Automation
 Name: Weather Widget
 Name: Puzzle Mania
 Name: Daily Journal
-
