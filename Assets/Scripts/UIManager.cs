@@ -125,6 +125,12 @@ public class UIManager : MonoBehaviour
     }
 
     public void AppRequest() {
+        GameObject user = GameObject.Find("User");
+        if(user.GetComponent<User>().GetPermission() == "") {
+            TextMeshProUGUI message = GameObject.Find("AddAppsPageMessage").GetComponent<TextMeshProUGUI>();
+            message.text = "You need to log in to add apps.";
+            return;
+        }
         AppTemplatePage.SetActive(true);
         LoginPage.SetActive(false);
         MainMenu.SetActive(false);
