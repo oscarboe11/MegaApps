@@ -31,6 +31,6 @@ public class EventsTest {
         AppRepository repo = new AppRepository();
         Dictionary<string, App> results = Events.SearchAppRepository("Your Music", repo);
 
-        Assert.True(results.ContainsKey(" Your Music"));
+        Assert.True(results.ContainsKey("Your Music"));
     }
 }

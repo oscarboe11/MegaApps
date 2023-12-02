@@ -143,7 +143,7 @@ public class Events : MonoBehaviour
             //Debug.Log(app.Key.IndexOf(searchTerms));
             if (app.Key.IndexOf(searchTerms, System.StringComparison.OrdinalIgnoreCase) >= 0) {
                 //Debug.Log("found" + searchTerms);
-                searchResults.Add(app.Key, app.Value);
+                searchResults.Add(app.Key.Trim(), app.Value);
             }
         }
 
