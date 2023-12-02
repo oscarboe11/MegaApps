@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using Unity.VisualScripting;
 
 // this class loads and stores all apps in a Dictionary<string, App>
 public class AppRepository {
@@ -85,17 +86,19 @@ public class AppRepository {
         pendingRepository.Remove(newApp.GetName());
         string[] lines = File.ReadAllLines(pendingFilePath);
         List<string> newlines = new List<string>();
-        Debug.Log(newApp.GetName());
         for(int i = 0; i < lines.Length; i++) {
-            Debug.Log(lines[i]);
-            if (lines[i] != "" && lines[i].Split(':')[1] == newApp.GetName()) {
-                Debug.Log("asdfasdf");
+            if(lines[i] == "") {
+                continue;
+            }
+            if (lines[i] != "" && lines[i].Split(':')[1].Trim() == newApp.GetName().Trim()) {
+                //Debug.Log(i + ":   " + lines[i].Split(':')[1] + " COMPARE WITH: " + newApp.GetName());
                 i += 7;
             }
             else {
                 newlines.Add(lines[i]);
             }
         }
+        //Debug.Log(newlines.Count);
         File.WriteAllLines(pendingFilePath, newlines.ToArray(), Encoding.UTF8);
     }
 
