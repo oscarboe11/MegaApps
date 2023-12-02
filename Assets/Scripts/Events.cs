@@ -1,23 +1,18 @@
 using System.IO;
 using System.Text;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using PlayFab.DataModels;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using UnityEngine.Rendering;
 
-public class Events : MonoBehaviour
-{
+// holds functions that are called by events manager on startup
+// and during general use
+public class Events : MonoBehaviour {
     private static AppRepository AppData = new AppRepository();
     private static Dictionary<string, App> appRepository = AppData.GetApps();
     private static Dictionary<string, App> pendingAppRepository = AppData.GetPendingApps();
     public GameObject searchBar;
 
+    // sets up and displays main menu
     public static void InitiateMenu(GameObject prefab, GameObject parent) {
         if (prefab != null && parent != null) {
             foreach (KeyValuePair<string, App> app in appRepository) {
@@ -33,6 +28,7 @@ public class Events : MonoBehaviour
         }
     }
 
+    // updates the displayed apps on main menu
     public static void UpdateMainMenu(GameObject prefab, GameObject parent) {
         for (int i = 0; i < parent.transform.childCount; i++) {
             Destroy(parent.transform.GetChild(i).gameObject);
@@ -40,6 +36,7 @@ public class Events : MonoBehaviour
         InitiateMenu(prefab, parent);
     }
 
+    // displays the store page for an app
     public static void InitiateAppPage(GameObject AppPage, AppObject appObject, GameObject CommentPrefab) {
         App app = appObject.GetAppInfo();
         GameObject Info = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
@@ -73,6 +70,7 @@ public class Events : MonoBehaviour
         InitiateComment(AppPage, CommentPrefab);
     }
 
+    // searches and displays results
     public static void InitiateSearchPage(GameObject prefab, GameObject parent, GameObject SearchBar) {
         string searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>().text;
         if(searchText.Length > 1) {
@@ -98,19 +96,7 @@ public class Events : MonoBehaviour
         }
     }
 
-    // private static void DeleteAppButton(GameObject parent, Dictionary<string, App> searchApp) {
-    //     Transform parentTransform = parent.transform;
-    //     if(parentTransform.childCount > 0) {
-    //         for (int i = 0; i < parentTransform.childCount; i++) {
-    //             // Access each child using the GetChild method
-    //             GameObject child = parentTransform.GetChild(i).gameObject;
-    //             if(!searchApp.ContainsKey(child.GetComponent<AppObject>().GetAppInfo().GetName())) {
-    //                 Destroy(child);
-    //             }
-    //         }
-    //     }
-    // }
-
+    // Handles the deletion of app button in gui
     private static void DeleteAppButton(GameObject parent, Dictionary<string, App> searchApp) {
     Transform parentTransform = parent.transform;
     if (parentTransform.childCount > 0) {
@@ -129,6 +115,7 @@ public class Events : MonoBehaviour
     }
 }
 
+    // checks if an app button already exists for an app
     private static bool CheckAppButtonExist(GameObject parent, KeyValuePair<string, App> app) {
         bool isExist = false;
         Transform parentTransform = parent.transform;
@@ -146,6 +133,7 @@ public class Events : MonoBehaviour
         return isExist;
     } 
 
+    // searches app repository for given search terms
     private static Dictionary<string, App> SearchAppRepository(string searchTerms) {
         Dictionary<string, App> searchResults = new Dictionary<string, App>();
         
@@ -162,6 +150,7 @@ public class Events : MonoBehaviour
         return searchResults;
     }
 
+    // handles creating comment from user input
     public static void WriteComment(GameObject AppPage, GameObject CommentInputField, GameObject CommentPrefab) {
         GameObject AppName = AppPage.transform.Find("Viewport").Find("Content").Find("Info").Find("Name").gameObject;
         string name = AppName.GetComponent<TextMeshProUGUI>().text;
@@ -190,6 +179,7 @@ public class Events : MonoBehaviour
         // Debug.Log("Write Done");
     }
 
+    // loads comments from file
     private static void InitiateComment(GameObject AppPage, GameObject CommentPrefab) {
         GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
         string name = AppInfo.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
@@ -219,6 +209,7 @@ public class Events : MonoBehaviour
         GameObject CommentObject = Instantiate(CommentPrefab, Comments.GetComponent<Transform>());
     }
 
+    // removes comments from view
     private static void DeleteComment(GameObject AppPage) {
         GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
         GameObject Comments = AppInfo.transform.Find("Comments").gameObject;
@@ -229,6 +220,7 @@ public class Events : MonoBehaviour
         }
     }
 
+    // handles reloading of comments
     private static void UpdateComment(GameObject AppPage, GameObject CommentPrefab) {
         GameObject AppInfo = AppPage.transform.Find("Viewport").Find("Content").Find("Info").gameObject;
         string name = AppInfo.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
@@ -252,6 +244,7 @@ public class Events : MonoBehaviour
         // CommentObject.GetComponent<TextMeshProUGUI>().text = comment;
     }
 
+    // loads category options from file for category dropdown
     public static void InitiateCategoryOptions(GameObject dropdown) {
         string filePath = Path.Combine(Application.streamingAssetsPath, "Categories.txt");
 
@@ -268,6 +261,7 @@ public class Events : MonoBehaviour
         m_Dropdown.AddOptions(categories);
     }
 
+    // loads apps that are of selected categories
     public static void InitiateCategoryMenu(GameObject prefab, GameObject parent, GameObject dropdown) {
         int categoryIndex = dropdown.GetComponentInChildren<TMP_Dropdown>().value;
         string category = dropdown.GetComponentInChildren<TMP_Dropdown>().options[categoryIndex].text;
@@ -298,6 +292,7 @@ public class Events : MonoBehaviour
             }
     }
 
+    // loads apps in pending list
     public static void InitiatePendingList(GameObject prefab, GameObject parent) {
         if (prefab != null && parent != null) {
             foreach (KeyValuePair<string, App> app in pendingAppRepository) {
@@ -312,6 +307,8 @@ public class Events : MonoBehaviour
             }
         }
     }
+
+    // removes pending apps from view
     public static void UpdatePendingList(GameObject prefab, GameObject parent) {
         for (int i = 0; i < parent.transform.childCount; i++) {
             Destroy(parent.transform.GetChild(i).gameObject);
@@ -319,6 +316,7 @@ public class Events : MonoBehaviour
         InitiatePendingList(prefab, parent);
     }
 
+    // displays pending apps
     public static void InitiatePendingAppPage(GameObject AppPage, AppObject appObject) {
         App app = appObject.GetAppInfo();
         GameObject Info = AppPage.transform.Find("Info").gameObject;
@@ -348,6 +346,7 @@ public class Events : MonoBehaviour
         gameObject.GetComponent<TextMeshProUGUI>().text = "Price: " + app.GetPrice();
     }
 
+    // handles app requests
     public static void SubmitAppRequest(GameObject AddAppPage) {
         List<string> pendingAppInfo = new List<string>();
 
@@ -386,6 +385,7 @@ public class Events : MonoBehaviour
         AppData.AddPendingApp(pendingAppInfo);
     }
 
+    // adds app to repository
     public static void ApproveNewApp(GameObject AddAppAdmin) {
         string name = AddAppAdmin.transform.Find("Info").Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text;
         App newApp = pendingAppRepository[name];
@@ -393,6 +393,7 @@ public class Events : MonoBehaviour
         AppData.DeletePendingApp(newApp);
     }
 
+    // rejects app, removes from pending apps list
     public static void RejectNewApp(GameObject AddAppAdmin) {
         string name = AddAppAdmin.transform.Find("Info").Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text;
         App newApp = pendingAppRepository[name];

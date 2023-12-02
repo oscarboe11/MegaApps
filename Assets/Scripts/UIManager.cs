@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
-{
+// handles changing between pages
+public class UIManager : MonoBehaviour {
     [Header("UI")]
     public GameObject AppButton;
     public GameObject PendingAppButton;
