@@ -8,6 +8,16 @@ using System.IO;
 public class AppReposTest
 {
     private string filePath = Path.Combine(Application.streamingAssetsPath, "Apps.txt");
+    List<string> testAppInfo =  new List<string> {
+        "Hello Worlds",
+        "This app is used for test.",
+        "Mega Apps",
+        "Desktop",
+        "1.0.0",
+        "Test",
+        "http://www.MegaApp.com",
+        "Free",
+    };
     [Test]
     public void AppReposConstructorTest()
     {
@@ -41,6 +51,14 @@ public class AppReposTest
         App testApp = new App(testAppInfo);
         appRepository.AddApp(testApp);
         Assert.True(appRepository.GetApps().TryGetValue("Hello Worlds", out App app1));
-        Assert.AreEqual(app1.GetCategory(), testAppInfo[5]);
+        Assert.Equals(app1.GetCategory(), testAppInfo[5]);
+    }
+
+    [Test]
+    public void GetAppInfoTest() {
+        AppObject appObject = new();
+        App app = new App(testAppInfo);
+
+        Assert.True(app.Equals(appObject.GetAppInfo()));
     }
 }
