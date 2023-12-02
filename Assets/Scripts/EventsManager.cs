@@ -11,8 +11,6 @@ public class EventsManager : MonoBehaviour {
     // called before first frame
     void Start() {
         Events.InitiateCategoryOptions(CategoriesDropDown);
-        Debug.Log(Application.platform.ToString());
-
     }
     
     // called every 0.02 seconds

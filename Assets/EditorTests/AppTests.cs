@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
+// holds tests for app class
 public class AppTests
 {
     List<string> testAppInfo =  new List<string> {
@@ -17,6 +15,7 @@ public class AppTests
         "Free",
     };
 
+    // tests app constructor
     [Test]
     public void AppConstructorTest()
     {
@@ -24,6 +23,7 @@ public class AppTests
         Assert.IsNotNull(testApp);
     }
 
+    // tests app copy constructor
     [Test]
     public void AppCopyConstructorTest()
     {
@@ -32,6 +32,7 @@ public class AppTests
         Assert.True(testApp == testCopyApp);
     }
 
+    // tests app getters after using copy constructors
     [Test]
     public void AppCopyGetterTest()
     {
@@ -46,6 +47,7 @@ public class AppTests
         Assert.False(testApp.GetPrice() != testApp.GetPrice());
     }
 
+    // tests setters after using copy constructors
     [Test]
     public void AppCopySetterTest()
     {

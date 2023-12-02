@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
-using System.IO;
+
 
 public class EventsTest {
+    // tests loading categories from file
     [Test]
     public void loadCategoriesTest() {
         List<string> results = Events.InitiateCategoryOptions(new GameObject());
@@ -26,11 +25,11 @@ public class EventsTest {
         Assert.AreEqual(results, categories);
     }
 
+    // tests search function
     [Test]
     public void searchTest() {
-        AppRepository appRepository = new AppRepository();
-        Dictionary<string, App> results = Events.SearchAppRepository("Music");
+        Dictionary<string, App> results = Events.SearchAppRepository("Your Music");
 
-        Assert.AreEqual(results, "Your Music");
+        Assert.True(results.ContainsKey("Your Music"));
     }
 }

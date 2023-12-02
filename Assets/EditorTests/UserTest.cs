@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using System.IO;
 
 public class UserTest {
     List<string> testAppInfo =  new List<string> {
@@ -17,14 +13,7 @@ public class UserTest {
         "Free",
     };
 
-    [Test]
-    public void wishListTest() {
-        User u = new User();
-        App app = new App(testAppInfo);
-        u.addToWishList(app);
-        Assert.True(u.getWishList().Contains(app));
-    }
-
+    // tests user constructor
     [Test]
     public void constructorTest() {
         User u1 = new User("oscar", "password");

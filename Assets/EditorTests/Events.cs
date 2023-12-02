@@ -140,7 +140,7 @@ public class Events : MonoBehaviour
         foreach (KeyValuePair<string, App> app in appRepository) {
             //Debug.Log("searching " + searchTerms);
 
-            Debug.Log(app.Key.IndexOf(searchTerms));
+            //Debug.Log(app.Key.IndexOf(searchTerms));
             if (app.Key.IndexOf(searchTerms, System.StringComparison.OrdinalIgnoreCase) >= 0) {
                 //Debug.Log("found" + searchTerms);
                 searchResults.Add(app.Key, app.Value);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+// Class for basic app info
 public class App {
     private string name;
     private string description;
@@ -11,6 +12,7 @@ public class App {
     private string price;
     public List<string> comments;  
 
+    // constructor
     public App(List<string> appInfo) {
         name = appInfo[0];
         description = appInfo[1];
@@ -23,6 +25,7 @@ public class App {
         comments = new List<string>();
     }
 
+    // constructor
     public App(App app) {
         this.name = app.GetName();
         this.description = app.GetDescription();
@@ -35,6 +38,7 @@ public class App {
         this.comments = app.GetComments();
     }
     
+    // getters
     public string GetName() {
         return name;
     }
