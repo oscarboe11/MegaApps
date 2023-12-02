@@ -1,4 +1,4 @@
-﻿Name:  Wanderlust Explorer
+Name:  Wanderlust Explorer
 Description:  Embark on a journey of discovery with Wanderlust Explorer – your passport to immersive travel experiences from the comfort of your device.
 Organization:  Global Adventures Co.
 Platform:  iOS, Android

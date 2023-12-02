@@ -134,13 +134,13 @@ public class Events : MonoBehaviour
 //         return isExist;
 //     } 
 
-    public static Dictionary<string, App> SearchAppRepository(string searchTerms) {
+    public static Dictionary<string, App> SearchAppRepository(string searchTerms, AppRepository appRepository) {
         Dictionary<string, App> searchResults = new Dictionary<string, App>();
         
-        foreach (KeyValuePair<string, App> app in appRepository) {
+        foreach (KeyValuePair<string, App> app in appRepository.GetApps()) {
             //Debug.Log("searching " + searchTerms);
 
-            Debug.Log(app.Key.IndexOf(searchTerms));
+            //Debug.Log(app.Key.IndexOf(searchTerms));
             if (app.Key.IndexOf(searchTerms, System.StringComparison.OrdinalIgnoreCase) >= 0) {
                 //Debug.Log("found" + searchTerms);
                 searchResults.Add(app.Key, app.Value);

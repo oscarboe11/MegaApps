@@ -8,8 +8,8 @@ using PlayFab.ClientModels;
 using TMPro;
 using Unity.VisualScripting;
 
-public class PlayfabManager : MonoBehaviour
-{
+// used to communicate with PlayFab database where users are stored
+public class PlayfabManager : MonoBehaviour {
     [Header("UI")]
     public TMP_Text message;
     public TMP_Text loginText;

@@ -1,0 +1,22 @@
+﻿Name: Your Music
+Comment: This app is good​
+Name: Weather Watch
+Comment: This app is not good​
+Name: Fitness Tracker
+Name: Photo Editor Pro
+Name: Recipe Master
+Name: Finance Tracker
+Name: Travel Companion
+Name: News Reader
+Name: Language Learning
+Name: Virtual Pet
+Name: Task Manager Pro
+Name: E-Book Reader
+Name: Virtual Reality World
+Name: Time Tracker
+Name: Meditation Master
+Name: Language Translator
+Name: Home Automation
+Name: Weather Widget
+Name: Puzzle Mania
+Name: Daily Journal

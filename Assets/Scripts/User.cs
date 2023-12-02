@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using Unity.VisualScripting;
 using UnityEngine;
 
+// Class for user and managing user permissions
+// admin can aprove app requests and delete comments
+// moderator can delete comments
 public class User : MonoBehaviour {
     private string permission = "";
 

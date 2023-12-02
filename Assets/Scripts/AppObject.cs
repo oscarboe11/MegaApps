@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class AppObject : MonoBehaviour
-{
+// Class for app button UI element
+public class AppObject : MonoBehaviour {
     private App thisApp;
 
     public void OnButtonClick() {

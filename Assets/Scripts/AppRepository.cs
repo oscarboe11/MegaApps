@@ -1,13 +1,10 @@
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-//sing UnityEditor.Build.Content;
 using System.Text;
 
-public class AppRepository
-{
+// this class loads and stores all apps in a Dictionary<string, App>
+public class AppRepository {
     // private FileStream file = new FileStream("Apps.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
     // private StreamReader file = new StreamReader(@"Assets\Scripts\Apps.txt");
     private string filePath = Path.Combine(Application.streamingAssetsPath, "Apps.txt");
@@ -15,6 +12,7 @@ public class AppRepository
     private Dictionary<string, App> repository = new Dictionary<string, App>();
     private Dictionary<string, App> pendingRepository = new Dictionary<string, App>();
 
+    // constructor
     public AppRepository() {
         StreamReader file = new StreamReader(filePath);
         List<string> appInfo = new List<string>();
@@ -50,6 +48,7 @@ public class AppRepository
         pendingFile.Close();
     }
 
+    // getters
     public Dictionary<string, App> GetApps() { 
         return this.repository;
     }
@@ -58,6 +57,7 @@ public class AppRepository
         return this.pendingRepository;
     }
 
+    // adds app to repository and writes to file
     public void AddApp(App newApp) {
         repository.Add(newApp.GetName(), newApp);
         StreamWriter writer = new StreamWriter(filePath, true);
@@ -80,6 +80,7 @@ public class AppRepository
         }
     }
 
+    // deletes pending app from file
     public void DeletePendingApp(App newApp) {
         pendingRepository.Remove(newApp.GetName());
         string[] lines = File.ReadAllLines(pendingFilePath);
@@ -97,6 +98,7 @@ public class AppRepository
         File.WriteAllLines(pendingFilePath, newlines.ToArray(), Encoding.UTF8);
     }
 
+    // writes pending apps to file
     public void AddPendingApp(List<string> appInfo) {
         pendingRepository.Add(appInfo[0], new App(appInfo));
         StreamWriter writer = new StreamWriter(pendingFilePath, true);

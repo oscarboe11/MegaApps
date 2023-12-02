@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// handles deleting of comments and delete button on comments
 public class CommentApp : MonoBehaviour {
     public Button deleteButton;
     public string commentText;
