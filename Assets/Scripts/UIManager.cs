@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
             return;
         }
         Events.WriteComment(AppPage, CommentInput, CommentPrefab);
-        CommentInput.GetComponent<TMP_InputField>().textComponent.text = "";
+        CommentInput.GetComponent<TMP_InputField>().text = "";
     }
 
     public void Login() {
@@ -165,10 +165,12 @@ public class UIManager : MonoBehaviour
 
     public void Approve() {
         Events.ApproveNewApp(AddAppAdmin);
+        AddApp();
     }
 
     public void Reject() {
         Events.RejectNewApp(AddAppAdmin);
+        AddApp();
     }
 
     private void UpdateMessage() {

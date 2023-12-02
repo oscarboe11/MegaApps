@@ -86,7 +86,6 @@ public class AppRepository
         List<string> newlines = new List<string>();
         Debug.Log(newApp.GetName());
         for(int i = 0; i < lines.Length; i++) {
-            Debug.Log(lines[i]);
             if (lines[i] != "" && lines[i].Split(':')[1] == newApp.GetName()) {
                 Debug.Log("asdfasdf");
                 i += 7;

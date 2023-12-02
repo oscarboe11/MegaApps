@@ -6,3 +6,11 @@ Version:  1.5.0
 Category:  Travel & Adventure
 Link:  www.wanderlustexplorerapp.com
 Price:  $0.99
+Name: 1​
+Description: 1​
+Organization: 1​
+Platform: 1​
+Version: 1​
+Category: 1​
+Link: 1​
+Price: 1​
