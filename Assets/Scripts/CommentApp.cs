@@ -23,6 +23,11 @@ public class CommentApp : MonoBehaviour {
 
     // handles comment deletion processes
     private void DeleteComment() {
+        GameObject user = GameObject.Find("User");
+        if(user.GetComponent<User>().GetPermission() == "User") {
+            
+            return;
+        }
         DeleteFromFile();
         
         Destroy(gameObject);
