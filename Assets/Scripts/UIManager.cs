@@ -20,6 +20,10 @@ public class UIManager : MonoBehaviour {
     public GameObject AddAppAdmin;
     public GameObject MainMenuContent;
     public GameObject PendingListContent;
+    [Header("Message")]
+    public GameObject LoginPageMessage;
+    public GameObject AppPageMessage;
+    public GameObject AddAppPageMessage;
     
     void Start() {
         Events.InitiateMenu(AppButton, MainMenuContent);
@@ -35,7 +39,15 @@ public class UIManager : MonoBehaviour {
 
     private void onCommentEndEditHandler(string arg0)
     {
+        GameObject user = GameObject.Find("User");
+        if(user.GetComponent<User>().GetPermission() == "") {
+            TextMeshProUGUI message = GameObject.Find("AppPageMessage").GetComponent<TextMeshProUGUI>();
+            message.text = "You need to log in to comment.";
+            CommentInput.GetComponent<TMP_InputField>().text = "";
+            return;
+        }
         Events.WriteComment(AppPage, CommentInput, CommentPrefab);
+        CommentInput.GetComponent<TMP_InputField>().textComponent.text = "";
     }
 
     public void Login() {
@@ -47,6 +59,7 @@ public class UIManager : MonoBehaviour {
         AddAppPage.SetActive(false);
         PendingAppPage.SetActive(false);
         AppTemplatePage.SetActive(false);
+        UpdateMessage();
     }
 
     public void Discover() {
@@ -59,6 +72,7 @@ public class UIManager : MonoBehaviour {
         AddAppPage.SetActive(false);
         PendingAppPage.SetActive(false);
         AppTemplatePage.SetActive(false);
+        UpdateMessage();
     }
 
     public void Categories() {
@@ -70,6 +84,7 @@ public class UIManager : MonoBehaviour {
         AddAppPage.SetActive(false);
         PendingAppPage.SetActive(false);
         AppTemplatePage.SetActive(false);
+        UpdateMessage();
     }
 
     public void ViewApp(AppObject appObject) {
@@ -105,6 +120,7 @@ public class UIManager : MonoBehaviour {
         AddAppPage.SetActive(false);
         PendingAppPage.SetActive(false);
         AppTemplatePage.SetActive(false);
+        UpdateMessage();
     }
 
     public void AddApp() {
@@ -117,6 +133,7 @@ public class UIManager : MonoBehaviour {
         SearchPage.SetActive(false);
         PendingAppPage.SetActive(false);
         AppTemplatePage.SetActive(false);
+        UpdateMessage();
     }
 
     public void AppRequest() {
@@ -138,6 +155,7 @@ public class UIManager : MonoBehaviour {
 
     public void SubmitRequest() {
         Events.SubmitAppRequest(AppTemplatePage);
+        AddApp();
     }
 
     public void Approve() {
@@ -146,5 +164,11 @@ public class UIManager : MonoBehaviour {
 
     public void Reject() {
         Events.RejectNewApp(AddAppAdmin);
+    }
+
+    private void UpdateMessage() {
+        LoginPageMessage.GetComponent<TextMeshProUGUI>().text = " ";
+        AppPageMessage.GetComponent<TextMeshProUGUI>().text = " ";
+        AddAppPageMessage.GetComponent<TextMeshProUGUI>().text = " ";
     }
 }

@@ -56,8 +56,9 @@ public class PlayfabManager : MonoBehaviour {
     void OnDataRecieved(GetUserDataResult result) {
         Debug.Log("Reciedved User Permission.");
         if(result.Data != null && result.Data.ContainsKey("Permission")) {
-            Debug.Log(result.Data["Permission"]);
-            User.GetComponent<User>().SetPermission(result.Data["Permission"].ToString());
+            Debug.Log(result.Data["Permission"].Value);
+            User.GetComponent<User>().SetPermission(result.Data["Permission"].Value);
+            Debug.Log("User permission set to: " + User.GetComponent<User>().GetPermission());
         }
         else {
             User.GetComponent<User>().SetPermission("User");

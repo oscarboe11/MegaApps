@@ -22,7 +22,7 @@ public class AppObject : MonoBehaviour {
         }
         else {
             TextMeshProUGUI message = GameObject.Find("AddAppsPageMessage").GetComponent<TextMeshProUGUI>();
-            message.text = "You don't have such permission.";
+            message.text = "You don't have permission to view pending apps.";
         }
     }
 
