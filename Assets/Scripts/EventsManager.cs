@@ -19,15 +19,6 @@ public class EventsManager : MonoBehaviour
         Events.InitiateCategoryOptions(CategoriesDropDown);
 
     }
-    void Update() {
-        // TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
-        // Events.InitiateSearchPage(AppButton, MainMenuContent, searchText.text);
-        // TextMeshProUGUI searchText = SearchBar.GetComponentInChildren<TextMeshProUGUI>();
-        // string searchTextString;
-        // if(searchText.text.Length > 0) {
-        //     searchTextString = searchText.text.Substring(0, searchText.text.Length - 1);
-        //     Events.SearchApps(searchTextString);
-    }
     
     void FixedUpdate() {
         Events.InitiateSearchPage(AppButton, SearchMenuContent, SearchBar);

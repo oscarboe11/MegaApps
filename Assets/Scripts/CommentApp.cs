@@ -24,8 +24,9 @@ public class CommentApp : MonoBehaviour {
     // handles comment deletion processes
     private void DeleteComment() {
         GameObject user = GameObject.Find("User");
-        if(user.GetComponent<User>().GetPermission() == "User") {
-            
+        if(user.GetComponent<User>().GetPermission() == "User" || user.GetComponent<User>().GetPermission() == "") {
+            TextMeshProUGUI message = GameObject.Find("AppPageMessage").GetComponent<TextMeshProUGUI>();
+            message.text = "You don't have permission to delete comments.";
             return;
         }
         DeleteFromFile();
