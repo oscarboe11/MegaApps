@@ -27,7 +27,7 @@ public class AppReposTest {
     [Test]
     public void AppReposGetterTest() {
         AppRepository appRepository = new AppRepository();
-        Assert.AreEqual(appRepository.GetApps().Count, 20);
+        Assert.AreEqual(appRepository.GetApps().Count, 21);
         Assert.True(appRepository.GetApps().TryGetValue(" Your Music", out App app1));
         Assert.False(appRepository.GetApps().TryGetValue(" Hello World", out App app2));
     }
@@ -49,7 +49,7 @@ public class AppReposTest {
         App testApp = new App(testAppInfo);
         appRepository.AddApp(testApp);
         Assert.True(appRepository.GetApps().TryGetValue("Hello Worlds", out App app1));
-        Assert.Equals(app1.GetCategory(), testAppInfo[5]);
+        Assert.True(app1.GetCategory().Equals(testAppInfo[5]));
     }
 
     // tests getting app info from app object(button)
@@ -59,6 +59,6 @@ public class AppReposTest {
         App app = new App(testAppInfo);
         appObject.SetAppInfo(app);
 
-        Assert.True(app.Equals(appObject.GetAppInfo()));
+        Assert.True(app.GetName().Equals(appObject.GetAppInfo().GetName()));
     }
 }

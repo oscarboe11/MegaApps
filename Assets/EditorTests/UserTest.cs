@@ -1,18 +1,8 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-
+// tests user class
 public class UserTest {
-    List<string> testAppInfo =  new List<string> {
-        "Hello Worlds",
-        "This app is used for test.",
-        "Mega Apps",
-        "Desktop",
-        "1.0.0",
-        "Test",
-        "http://www.MegaApp.com",
-        "Free",
-    };
-
+    
     // tests user constructor
     [Test]
     public void constructorTest() {

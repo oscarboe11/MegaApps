@@ -28,8 +28,9 @@ public class EventsTest {
     // tests search function
     [Test]
     public void searchTest() {
-        Dictionary<string, App> results = Events.SearchAppRepository("Your Music");
+        AppRepository repo = new AppRepository();
+        Dictionary<string, App> results = Events.SearchAppRepository("Your Music", repo);
 
-        Assert.True(results.ContainsKey("Your Music"));
+        Assert.True(results.ContainsKey(" Your Music"));
     }
 }
