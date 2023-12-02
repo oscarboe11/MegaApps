@@ -1,5 +1,4 @@
-﻿Name: Your Music
-Comment: 123123​
+Name: Your Music
 Comment: 123​
 Name: Weather Watch
 Name: Fitness Tracker
