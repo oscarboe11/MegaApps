@@ -1,13 +1,6 @@
 using System.IO;
-using System.Text;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-
 public class Events : MonoBehaviour
 {
     private static Dictionary<string, App> appRepository = new AppRepository().GetApps();

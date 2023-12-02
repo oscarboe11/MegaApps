@@ -27,7 +27,7 @@ public class AppReposTest {
     [Test]
     public void AppReposGetterTest() {
         AppRepository appRepository = new AppRepository();
-        Assert.AreEqual(appRepository.GetApps().Count, 21);
+        Assert.AreEqual(21, appRepository.GetApps().Count);
         Assert.True(appRepository.GetApps().TryGetValue(" Your Music", out App app1));
         Assert.False(appRepository.GetApps().TryGetValue(" Hello World", out App app2));
     }

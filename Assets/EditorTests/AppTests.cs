@@ -29,7 +29,7 @@ public class AppTests
     {
         App testApp = new App(testAppInfo);
         App testCopyApp = new App(testApp);
-        Assert.True(testApp == testCopyApp);
+        Assert.True(testApp.GetName() == testCopyApp.GetName());
     }
 
     // tests app getters after using copy constructors
@@ -38,7 +38,6 @@ public class AppTests
     {
         App testApp = new App(testAppInfo);
         App testCopyApp = new App(testApp);
-        Assert.True(testApp == testCopyApp);
         Assert.AreEqual(testApp.GetName(), testCopyApp.GetName());
         Assert.AreNotEqual(testApp.GetName(), testApp.GetCategory());
         Assert.AreNotEqual(testApp.GetVersion(), testCopyApp.GetDescription());

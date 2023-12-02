@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
+// Class for basic app info
 public class App {
     private string name;
     private string description;
@@ -11,8 +10,8 @@ public class App {
     private string organization;
     private string link;
     private string price;
-    public List<string> comments;  
 
+    // constructor
     public App(List<string> appInfo) {
         name = appInfo[0];
         description = appInfo[1];
@@ -22,9 +21,9 @@ public class App {
         organization = appInfo[2];
         link = appInfo[6];
         price = appInfo[7];
-        comments = new List<string>();
     }
 
+    // constructor
     public App(App app) {
         this.name = app.GetName();
         this.description = app.GetDescription();
@@ -34,9 +33,9 @@ public class App {
         this.organization = app.GetOrganization();
         this.link = app.GetLink();
         this.price = app.GetPrice();
-        this.comments = app.GetComments();
     }
     
+    // getters
     public string GetName() {
         return name;
     }
@@ -67,10 +66,6 @@ public class App {
     
     public string GetPrice() {
         return price;
-    }
-
-    public List<string> GetComments() {
-        return comments;
     }
 
     // setters
@@ -104,22 +99,5 @@ public class App {
     
     public void SetPrice(string price) {
         this.price = price;
-    }
-
-    public static bool operator ==(App left, App right) {
-        return left.GetName() == right.GetName() &&
-               left.GetDescription() == right.GetDescription() &&
-               left.GetCategory() == right.GetCategory() &&
-               left.GetPlatform() == right.GetPlatform() &&
-               left.GetVersion() == right.GetVersion() &&
-               left.GetOrganization() == right.GetOrganization() &&
-               left.GetLink() == right.GetLink() &&
-               left.GetPrice() == right.GetPrice() &&
-               left.GetComments() == right.GetComments();
-
-    }
-
-    public static bool operator !=(App left, App right) {
-        return !(left == right);
     }
 }
